@@ -11,7 +11,7 @@ import com.base.HandleException;
 import com.selenium.actions.ElementActions;
 
 public class ElementActionsImplementions implements ElementActions {
-	final static Logger logger = Logger.getLogger(ElementActionsImplementions.class.getName());
+	final static Logger LOGGER = Logger.getLogger(ElementActionsImplementions.class.getName());
 	/**
 	 * This method will wait until 120 seconds
 	 * 
@@ -108,7 +108,7 @@ public class ElementActionsImplementions implements ElementActions {
 		WebElement webElement = getElement(element);
 		if (webElement.isEnabled()) {
 			webElement.click();
-			logger.info("Click action performed on this element: " + element);
+			LOGGER.info("Click action performed on this element: " + element);
 		} else
 			throw new HandleException("Failed to click on element on this locator: " + element);
 	}
@@ -126,7 +126,7 @@ public class ElementActionsImplementions implements ElementActions {
 		String text = null;
 		if (webElement.isDisplayed()) {
 			text = webElement.getText();
-			logger.info("Text found on this locator: " + element);
+			LOGGER.info("Text found on this locator: " + element);
 		} else {
 			throw new HandleException("Failed to get the text on this locator: " + element);
 		}
@@ -144,7 +144,7 @@ public class ElementActionsImplementions implements ElementActions {
 
 		if (webElement.isEnabled()) {
 			webElement.submit();
-			logger.info("Submit action performed on this element: " + element);
+			LOGGER.info("Submit action performed on this element: " + element);
 		} else
 			throw new HandleException("Failed to submit on element with this locator: " + element);
 	}
@@ -160,7 +160,7 @@ public class ElementActionsImplementions implements ElementActions {
 
 		if (webElement.isEnabled()) {
 			webElement.clear();
-			logger.info("Clear text on this locator: " + element);
+			LOGGER.info("Clear text on this locator: " + element);
 		} else
 			throw new HandleException("Failed to clear the element text on this locator: " + element);
 	}
@@ -180,7 +180,7 @@ public class ElementActionsImplementions implements ElementActions {
 		if (webElement.isEnabled()) {
 			webElement.clear();
 			webElement.sendKeys(textToSend);
-			logger.info("Text entered on this locator :" + element + "" + textToSend);
+			LOGGER.info("Text entered on this locator :" + element + "" + textToSend);
 		} else
 			throw new HandleException("Failed to send the key on this locator: " + element);
 	}

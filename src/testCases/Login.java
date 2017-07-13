@@ -1,5 +1,7 @@
 package testCases;
 
+import java.io.IOException;
+
 import org.testng.annotations.Test;
 
 import com.base.CommonUtility;
@@ -20,13 +22,13 @@ public class Login {
 	DataStoreInMap testData ;
 	DataStoreInMap locators;
 
-	public Login() throws HandleException {
-		testData = CommonUtility.loadData("Test Data", "LoginData");
-		locators = CommonUtility.loadData("Pages", "LoginPage");
+	public Login() throws HandleException, IOException {
+		testData = CommonUtility.storeDataInMap("Test Data", "LoginData");
+		locators = CommonUtility.storeDataInMap("Pages", "LoginPage");
 	}
 
 	@Test
-	public void adminLogin() throws HandleException {
+	public void adminLogin() throws HandleException, IOException {
 		br.openBrowser();
 		ele.sendKeysToElement(testData.getValue("userName"), locators.getValue("userName"));
 		ele.sendKeysToElement(testData.getValue("password"), locators.getValue("password"));

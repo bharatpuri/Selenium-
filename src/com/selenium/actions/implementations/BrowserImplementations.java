@@ -1,5 +1,6 @@
 package com.selenium.actions.implementations;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -17,7 +18,7 @@ import com.selenium.actions.SupportedBrowser;
  */
 public class BrowserImplementations implements Browser {
 
-	final static Logger logger = Logger.getLogger(BrowserImplementations.class.getName());
+	final static Logger LOGGER = Logger.getLogger(BrowserImplementations.class.getName());
 
 	Driver driver = new Driver();
 
@@ -27,17 +28,17 @@ public class BrowserImplementations implements Browser {
 	 * @see com.selenium.actions.Browser#openBrowser()
 	 */
 	@Override
-	public void openBrowser() throws HandleException {
+	public void openBrowser() throws HandleException, IOException {
 		DataStoreInMap configData = new DataStoreInMap();
-		configData = CommonUtility.loadData("Config", "config");
+		configData = CommonUtility.storeDataInMap("Config", "config");
 		String webURL = configData.getValue("testsiteBaseURl");
 
 		Driver.getBrowser(SupportedBrowser.CHROME).get(webURL);
 		Driver.getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		logger.info("Implicit wait applied on the driver for 60 seconds");
+		LOGGER.info("Implicit wait applied on the driver for 60 seconds");
 		Driver.getDriver().manage().window().maximize();
-		logger.info("Maximixe the window");
-		logger.info("Web application launched: " + webURL);
+		LOGGER.info("Maximixe the window");
+		LOGGER.info("Web application launched: " + webURL);
 
 	}
 
@@ -53,7 +54,7 @@ public class BrowserImplementations implements Browser {
 			Driver.getDriver().close();
 			Driver.getDriver().quit();
 			driver.setDriver(null);
-			logger.info("Close all the browser open by selenium webdriver");
+			LOGGER.info("Close all the browser open by selenium webdriver");
 		} else
 			throw new HandleException("Failed while quiting the browser");
 
@@ -70,7 +71,7 @@ public class BrowserImplementations implements Browser {
 		if (Driver.getDriver() != null) {
 			Driver.getDriver().close();
 			driver.setDriver(null);
-			logger.info("Close all the browser open by selenium webdriver");
+			LOGGER.info("Close all the browser open by selenium webdriver");
 		} else
 			throw new HandleException("Failed while closing the browser");
 

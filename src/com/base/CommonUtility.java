@@ -1,8 +1,6 @@
 package com.base;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +8,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
-
 
 /**
  * This class consist of method which are common to all framework
@@ -20,11 +17,7 @@ import org.apache.log4j.Logger;
  */
 public class CommonUtility {
 
-	static DataStoreInMap allLocators = null;
-	static DataStoreInMap allConfigData = null;
-	static DataStoreInMap allTestData = null;
-
-	final static Logger logger = Logger.getLogger(CommonUtility.class.getName());
+	final static Logger LOGGER = Logger.getLogger(CommonUtility.class.getName());
 
 	/**
 	 * This method will check the file is exist in selected directory or not
@@ -33,123 +26,77 @@ public class CommonUtility {
 	 * @return true or false
 	 */
 	public static boolean isFileExit(String filePath) {
+		filePath = "resource/" + filePath;
 		File files = new File(filePath);
 		return files.exists();
 	}
-	
-	/** This method will load the data from selected property file
+
+	/**
+	 * This method will load the data from selected property file
+	 * 
 	 * @param folderName
 	 * @param fileName
-	 * @return mapData
+	 * @return property data
 	 * @throws HandleException
 	 */
-	public static DataStoreInMap loadData(String folderName, String fileName) throws HandleException {
-		Properties configData = new Properties();
-		DataStoreInMap mapData = new DataStoreInMap();
-		String filePath = "src/" + folderName + "/" + fileName + ".properties";
-		
-		if (isFileExit(filePath)) {
-			InputStream fileData = null;
+	public static Properties loadData(String folderName, String fileName) throws HandleException {
+		InputStream resourceStream;
+		Properties props = new Properties();
+		String resourceName;
+
+		if (folderName.isEmpty()) {
+			resourceName = fileName + ".properties";
+		} else {
+			resourceName = folderName + "/" + fileName + ".properties";
+		}
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		resourceStream = loader.getResourceAsStream(resourceName);
+		if (resourceStream != null) {
 			try {
-				fileData = new FileInputStream(filePath);
+				props.load(resourceStream);
+				LOGGER.info("Property file is loaded successfully: " + resourceName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
 				try {
-					if (fileData.read() != -1) {
-						try {
-							configData.load(new FileInputStream(filePath));
-							logger.info("Property file is loaded successfully: " + filePath);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					} else {
-						logger.debug("File is empty: " + filePath);
-						throw new HandleException("File is empty: " + filePath);
-					}
+					resourceStream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
 			}
 		} else {
-			logger.error("Filed file not found: " + filePath);
-			throw new HandleException("Filed file not found: " + filePath);
+			throw new HandleException("Filed file not found: " + resourceName);
 		}
-		Set<String> propertyNames = configData.stringPropertyNames();
+		return props;
+	}
+
+	/**
+	 * This method will store the data in MAP
+	 * 
+	 * @param folderName
+	 * @param fileName
+	 * @return
+	 * @throws HandleException
+	 * @throws IOException
+	 */
+	public static DataStoreInMap storeDataInMap(String folderName, String fileName) throws HandleException {
+		DataStoreInMap mapData = new DataStoreInMap();
+		Properties data = loadData(folderName, fileName);
+		Set<String> propertyNames = data.stringPropertyNames();
 		for (String Property : propertyNames) {
-			mapData.put(Property, configData.getProperty(Property));
+			mapData.put(Property, data.getProperty(Property));
 		}
 		return mapData;
 	}
 
 	/**
-	 * This method will get the test data from selected file and store in
-	 * testData object
+	 * This method will wait for provided seconds
 	 * 
-	 * @param fileName
-	 * @return testData
-	 * @throws HandleException
+	 * @throws InterruptedException
 	 */
-//	public static DataStoreInObjects loadTestData(String folderName, String fileName) throws HandleException {
-//		return allTestData = CommonUtility.loadData(folderName, fileName);
-//	}
-	
-	/**
-	 * This method will get the configuration data from selected file and store in
-	 * configData object
-	 * 
-	 * @param fileName
-	 * @return testData
-	 * @throws HandleException
-	 */
-//	public static DataStoreInMap loadConfigData(String folderName, String fileName) throws HandleException {
-//		return allConfigData = CommonUtility.loadData(folderName, fileName);
-//	}
-//	
-	/**
-	 * This method will wait for provided seconds 
-	 * @throws InterruptedException 
-	 */
-	public static void waitSeconds(int seconds) throws InterruptedException{
+	public static void waitSeconds(int seconds) throws InterruptedException {
 		TimeUnit.SECONDS.sleep(seconds);
-		
-	}
-	public static Properties loadDataDemo(String folderName, String fileName) throws HandleException {
-		Properties configData = new Properties();
-		//DataStoreInObjects mapData = new DataStoreInObjects();
-		String filePath = "src/" + folderName + "/" + fileName + ".properties";
-		
-		if (isFileExit(filePath)) {
-			InputStream fileData = null;
-			try {
-				fileData = new FileInputStream(filePath);
-				try {
-					if (fileData.read() != -1) {
-						try {
-							configData.load(new FileInputStream(filePath));
-							logger.info("Property file is loaded successfully: " + filePath);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					} else {
-						logger.debug("File is empty: " + filePath);
-						throw new HandleException("File is empty: " + filePath);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		} else {
-			logger.error("Filed file not found: " + filePath);
-			throw new HandleException("Filed file not found: " + filePath);
-		}
-//		Set<String> propertyNames = configData.stringPropertyNames();
-//		for (String Property : propertyNames) {
-//			mapData.put(Property, configData.getProperty(Property));
-		//}
-		return configData;
-	}
 
+	}
 
 }
