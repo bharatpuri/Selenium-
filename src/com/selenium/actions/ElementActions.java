@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import com.base.HandleException;
 
 public interface ElementActions {
+	
 	public WebElement getElement(String locator) throws HandleException;
 
 	public void clickOnElement(String element) throws HandleException;

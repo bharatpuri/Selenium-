@@ -11,7 +11,7 @@ import com.base.HandleException;
 import com.selenium.actions.ElementActions;
 
 public class ElementActionsImplementions implements ElementActions {
-	final static Logger LOGGER = Logger.getLogger(ElementActionsImplementions.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(ElementActionsImplementions.class.getName());
 	/**
 	 * This method will wait until 120 seconds
 	 * 

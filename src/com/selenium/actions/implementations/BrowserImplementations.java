@@ -18,7 +18,7 @@ import com.selenium.actions.SupportedBrowser;
  */
 public class BrowserImplementations implements Browser {
 
-	final static Logger LOGGER = Logger.getLogger(BrowserImplementations.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(BrowserImplementations.class.getName());
 
 	Driver driver = new Driver();
 
@@ -29,6 +29,7 @@ public class BrowserImplementations implements Browser {
 	 */
 	@Override
 	public void openBrowser() throws HandleException, IOException {
+
 		DataStoreInMap configData = new DataStoreInMap();
 		configData = CommonUtility.storeDataInMap("Config", "config");
 		String webURL = configData.getValue("testsiteBaseURl");
@@ -50,14 +51,15 @@ public class BrowserImplementations implements Browser {
 	 */
 	@Override
 	public void quiteBrowser() throws HandleException {
+
 		if (Driver.getDriver() != null) {
 			Driver.getDriver().close();
 			Driver.getDriver().quit();
 			driver.setDriver(null);
 			LOGGER.info("Close all the browser open by selenium webdriver");
-		} else
+		} else {
 			throw new HandleException("Failed while quiting the browser");
-
+		}
 	}
 
 	/*

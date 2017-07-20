@@ -9,7 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import com.selenium.actions.SupportedBrowser;
 
 public class Driver {
-	final static Logger logger = Logger.getLogger(Driver.class.getName());
+	private final static Logger logger = Logger.getLogger(Driver.class.getName());
 	private static WebDriver driver;
 
 	public static WebDriver getDriver() {
