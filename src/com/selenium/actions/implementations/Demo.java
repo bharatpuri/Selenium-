@@ -2,30 +2,38 @@ package com.selenium.actions.implementations;
 
 import com.base.HandleException;
 
-public class Demo {
-	static int a = 10;
-	int b = 20;
-
-	public void sum(int...a){
-		int total = 0;
-		for (int x : a){
-			total = total + x;
-		}
-		System.out.println(total);
-	
+class A{
+	static public int b = 30;
+	int a = 10;
+	public void m1(){
+		System.out.println("perent method");
 	}
+}
+class B extends A{
+	int a = 20;
+	public void m1(){
+		System.out.println("child method");
+	}
+}
+public class Demo {
+
 	public static void main(String[] args) throws HandleException {
-		Demo d = new Demo();
-		d.sum(23,34);
-		d.sum(23,34,54);
+		A a = new A();
+		System.out.println(a.a);
+		a.m1();
+		//a.m1();
+		//a.m2();//compile time error
 		
+		B b = new B();
+		System.out.println(b.a);
+		b.m1();
+		//b.m2();
 		
-		//int a = 0;
-//		d.a = 111;
-//		d.b = 222;
-//		Demo d2 = new Demo();
-//		System.out.println(d2.a);	
-		//System.out.println(a);
+		A ab = new B();
+		System.out.println(ab.a);
+		ab.m1();
+	//	ab.m2(); //compile time error
 		
+		//B ba = new A();//invalid not allowed
 	}
 }

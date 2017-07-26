@@ -44,7 +44,7 @@ public class CommonUtility {
 		Properties props = new Properties();
 		String resourceName;
 
-		if (folderName.isEmpty()) {
+		if (null != folderName && folderName.isEmpty()) {
 			resourceName = fileName + ".properties";
 		} else {
 			resourceName = folderName + "/" + fileName + ".properties";
