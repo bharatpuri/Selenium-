@@ -31,10 +31,11 @@ public class BrowserImplementations implements Browser {
 	public void openBrowser() throws HandleException, IOException {
 
 		DataStoreInMap configData = new DataStoreInMap();
-		configData = CommonUtility.storeDataInMap("Config", "config");
+		configData = CommonUtility.loadDataInMap("Config", "config");
 		String webURL = configData.getValue("testsiteBaseURl");
 
 		Driver.getBrowser(SupportedBrowser.CHROME).get(webURL);
+		
 		Driver.getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		LOGGER.info("Implicit wait applied on the driver for 60 seconds");
 		Driver.getDriver().manage().window().maximize();

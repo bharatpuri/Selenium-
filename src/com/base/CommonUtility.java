@@ -1,6 +1,7 @@
 package com.base;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -38,6 +39,7 @@ public class CommonUtility {
 	 * @param fileName
 	 * @return property data
 	 * @throws HandleException
+	 * @throws FileNotFoundException 
 	 */
 	public static Properties loadData(String folderName, String fileName) throws HandleException {
 		InputStream resourceStream;
@@ -77,11 +79,13 @@ public class CommonUtility {
 	 * @param fileName
 	 * @return
 	 * @throws HandleException
+	 * @throws FileNotFoundException 
 	 * @throws IOException
 	 */
-	public static DataStoreInMap storeDataInMap(String folderName, String fileName) throws HandleException {
+	public static DataStoreInMap loadDataInMap(String folderName, String fileName) throws HandleException {
 		DataStoreInMap mapData = new DataStoreInMap();
 		Properties data = loadData(folderName, fileName);
+		
 		Set<String> propertyNames = data.stringPropertyNames();
 		for (String Property : propertyNames) {
 			mapData.put(Property, data.getProperty(Property));

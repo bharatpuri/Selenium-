@@ -1,2 +1,9 @@
 2017-07-13 16:01:16 INFO  CommonUtility:160 - Property file is loaded successfully: TestDatan/LoginData.properties
 2017-07-13 16:01:41 INFO  CommonUtility:160 - Property file is loaded successfully: TestDatan/LoginData.properties
+2017-07-27 14:29:54 INFO  Browsers:23 - Close all the browser open by selenium webdriver
+2017-07-27 14:41:35 INFO  Browsers:23 - Close the browser open by selenium webdriver
+2017-07-27 14:44:41 INFO  Browsers:23 - Close the browser open by selenium webdriver
+2017-07-27 14:45:13 INFO  Browsers:23 - Close the browser open by selenium webdriver
+2017-07-27 17:56:58 INFO  CommonUtility:60 - Property file is loaded successfully: TestData/LoginData.properties
+2017-07-27 17:57:22 INFO  CommonUtility:60 - Property file is loaded successfully: TestData/LoginData.properties
+2017-07-27 17:57:43 INFO  CommonUtility:60 - Property file is loaded successfully: config.properties

@@ -24,7 +24,7 @@ public class AlertTestDemo {
 	DataStoreInMap locators = new DataStoreInMap();
   @Test
   public void f() throws HandleException, InterruptedException, IOException {
-	  locators = CommonUtility.storeDataInMap("Pages", "LoginPage");
+	  locators = CommonUtility.loadDataInMap("Pages", "LoginPage");
 	  br.openBrowser();
 	  Thread.sleep(10000);
 	  //ele.clickOnElement(locators.getValue("alertButton"));

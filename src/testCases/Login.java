@@ -23,8 +23,8 @@ public class Login {
 	DataStoreInMap locators;
 
 	public Login() throws HandleException, IOException {
-		testData = CommonUtility.storeDataInMap("Test Data", "LoginData");
-		locators = CommonUtility.storeDataInMap("Pages", "LoginPage");
+		testData = CommonUtility.loadDataInMap("Test Data", "LoginData");
+		locators = CommonUtility.loadDataInMap("Pages", "LoginPage");
 	}
 
 	@Test
