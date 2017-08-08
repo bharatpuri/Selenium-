@@ -5,7 +5,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.base.HandleException;
 
-public class IE extends Browsers {
+public class IE extends Browser {
 
 	@Override
 	public WebDriver getBrowser() throws HandleException {

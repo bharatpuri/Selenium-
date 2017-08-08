@@ -5,22 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.base.HandleException;
 import com.selenium.actions.ElementActions;
+import com.selenium.browser.Browser;
+import com.selenium.wait.SeleniumWait;
 
 public class ElementActionsImplementions implements ElementActions {
 	private final static Logger LOGGER = Logger.getLogger(ElementActionsImplementions.class.getName());
-	/**
-	 * This method will wait until 120 seconds
-	 * 
-	 * @return
-	 * @throws HandleException
-	 */
-	public WebDriverWait waitForElement() throws HandleException {
-		return new WebDriverWait(Driver.getDriver(), 120);
-	}
 
 	@Override
 	public WebElement getElement(String locator) throws HandleException {
@@ -31,63 +23,63 @@ public class ElementActionsImplementions implements ElementActions {
 
 		switch (loctor_type) {
 		case "id": // Search the element with Id property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.id(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.id(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.id(locator_value));
+				webElement = Browser.getDriver().findElement(By.id(locator_value));
 			} else
 				throw new HandleException("No element found on web page by " + locator_value);
 			break;
 		case "name": // Search the element with Name property
-			webElement = Driver.getDriver().findElement(By.name(locator_value));
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.name(locator_value)))
+			webElement = Browser.getDriver().findElement(By.name(locator_value));
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.name(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.name(locator_value));
+				webElement = Browser.getDriver().findElement(By.name(locator_value));
 			} else
 				throw new HandleException("No element found on web page by " + locator_value);
 			break;
 		case "cssSelector": // Search the element with cssSelector property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.cssSelector(locator_value));
+				webElement = Browser.getDriver().findElement(By.cssSelector(locator_value));
 			} else
 				throw new com.base.HandleException("No element found on web page by " + locator_value);
 			break;
 		case "xpath": // Search the element with xpath property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.xpath(locator_value));
-				JavascriptExecutor je = (JavascriptExecutor) Driver.getDriver();
+				webElement = Browser.getDriver().findElement(By.xpath(locator_value));
+				JavascriptExecutor je = (JavascriptExecutor) Browser.getDriver();
 				je.executeScript("arguments[0].scrollIntoView(true);", webElement);
 
 			} else
 				throw new HandleException("No element found on web page by " + locator_value);
 			break;
 		case "className": // Search the element with className property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.className(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.className(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.className(locator_value));
+				webElement = Browser.getDriver().findElement(By.className(locator_value));
 			} else
 				throw new HandleException("No element found on web page by " + locator_value);
 			break;
 		case "linkText": // Search the element with linkText property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.linkText(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.linkText(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.linkText(locator_value));
+				webElement = Browser.getDriver().findElement(By.linkText(locator_value));
 			} else
 				throw new HandleException("No element found on web page by " + locator_value);
 			break;
 		case "partialLinkText":// Search the element with partialLinkText
 								// property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.partialLinkText(locator_value));
+				webElement = Browser.getDriver().findElement(By.partialLinkText(locator_value));
 			} else
 				throw new HandleException("No element found on web page by " + locator_value);
 			break;
 		case "tagName": // Search the element with tagName property
-			if (waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.tagName(locator_value)))
+			if (SeleniumWait.waitForElement().until(ExpectedConditions.visibilityOfElementLocated(By.tagName(locator_value)))
 					.isDisplayed()) {
-				webElement = Driver.getDriver().findElement(By.tagName(locator_value));
+				webElement = Browser.getDriver().findElement(By.tagName(locator_value));
 			} else
 				throw new HandleException("Failed invalid locator type: " + locator_value);
 			break;
@@ -141,7 +133,6 @@ public class ElementActionsImplementions implements ElementActions {
 	@Override
 	public void submitOnElement(String element) throws HandleException {
 		WebElement webElement = getElement(element);
-
 		if (webElement.isEnabled()) {
 			webElement.submit();
 			LOGGER.info("Submit action performed on this element: " + element);
@@ -172,7 +163,6 @@ public class ElementActionsImplementions implements ElementActions {
 	 *            string which sending to the text field
 	 * @param element
 	 *            name of the on which we are sending the text/data
-	 * @throws InterruptedException
 	 */
 	@Override
 	public void sendKeysToElement(String textToSend, String element) throws HandleException {

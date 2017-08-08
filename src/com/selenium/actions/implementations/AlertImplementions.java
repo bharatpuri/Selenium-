@@ -4,6 +4,7 @@ import org.openqa.selenium.Alert;
 
 import com.base.HandleException;
 import com.selenium.actions.AlertActions;
+import com.selenium.browser.Browser;
 
 public class AlertImplementions implements AlertActions {
 	
@@ -12,7 +13,7 @@ public class AlertImplementions implements AlertActions {
 		
 		Alert simpleAlert;
 
-		simpleAlert = Driver.getDriver().switchTo().alert();
+		simpleAlert = Browser.getDriver().switchTo().alert();
 
 		String alertText = simpleAlert.getText();
 
@@ -23,7 +24,7 @@ public class AlertImplementions implements AlertActions {
 	public void handleAlert(String action) {
 		Alert simpleAlert;
 
-		simpleAlert =  Driver.getDriver().switchTo().alert();
+		simpleAlert =  Browser.getDriver().switchTo().alert();
 
 		if (action.equalsIgnoreCase("accept")) {
 			simpleAlert.accept();

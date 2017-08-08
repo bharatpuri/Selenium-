@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  */
 public class HandleException extends Exception {
 	
-	final static Logger LOGGER = Logger.getLogger(CommonUtility.class.getName());
+	final static Logger LOGGER = Logger.getLogger(DataStoreRepository.class.getName());
 	private static final long serialVersionUID = 1L;
 
 	public HandleException(String message) {

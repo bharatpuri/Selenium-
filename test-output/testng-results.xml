@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="22365" started-at="2017-07-05T07:10:45Z" finished-at="2017-07-05T07:11:07Z">
+  <suite name="Default suite" duration-ms="136" started-at="2017-08-04T06:39:12Z" finished-at="2017-08-04T06:39:13Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="22365" started-at="2017-07-05T07:10:45Z" finished-at="2017-07-05T07:11:07Z">
-      <class name="testCases.AlertTestDemo">
-        <test-method status="PASS" signature="f()[pri:0, instance:testCases.AlertTestDemo@5bcab519]" name="f" duration-ms="22347" started-at="2017-07-05T12:40:45Z" finished-at="2017-07-05T12:41:07Z">
+    <test name="Default test" duration-ms="136" started-at="2017-08-04T06:39:12Z" finished-at="2017-08-04T06:39:13Z">
+      <class name="testCases.TestDemo">
+        <test-method status="PASS" signature="demo()[pri:0, instance:testCases.TestDemo@5f375618]" name="demo" duration-ms="116" started-at="2017-08-04T12:09:12Z" finished-at="2017-08-04T12:09:13Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- f -->
-      </class> <!-- testCases.AlertTestDemo -->
+        </test-method> <!-- demo -->
+      </class> <!-- testCases.TestDemo -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

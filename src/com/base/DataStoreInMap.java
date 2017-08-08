@@ -9,7 +9,8 @@ import java.util.Map;
  * @author bharatp
  *
  */
-public class DataStoreInMap {
+
+public class DataStoreInMap implements IDataStoreInMap {
 	Map<String, String> dataFromFiles;
 
 	public DataStoreInMap() {
@@ -29,5 +30,5 @@ public class DataStoreInMap {
 	public void put(String key, String value) {
 		dataFromFiles.put(key, value);
 	}
-}
 
+}
